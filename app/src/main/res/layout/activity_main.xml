@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 選擇收入或支出 -->
+    <Spinner
+        android:id="@+id/spnCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/category_array" />
+
+    <!-- 收入按鈕容器 -->
+    <GridLayout
+        android:id="@+id/incomeButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="3"
+        android:padding="8dp"
+        android:visibility="invisible">
+
+
+        <Button
+            android:id="@+id/btnSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="💰 薪水" />
+
+        <Button
+            android:id="@+id/btnBonus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="🏆  獎金" />
+
+        <Button
+            android:id="@+id/btnInterest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="💳 利息" />
+
+        <Button
+            android:id="@+id/btnGift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="🎁 贈與" />
+
+        <Button
+            android:id="@+id/btnAllowance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="💵 零用錢" />
+
+        <Button
+            android:id="@+id/btninOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="📥 其他" />
+    </GridLayout>
+
+    <!-- 支出按鈕容器 -->
+    <GridLayout
+        android:id="@+id/expenseButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="3"
+        android:padding="8dp"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/btnFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="🍔 食物" />
+
+        <Button
+            android:id="@+id/btnHousehold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="🧻 生活品" />
+
+        <Button
+            android:id="@+id/btnClothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="👗 衣服" />
+
+        <Button
+            android:id="@+id/btnTravel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="🛩️ 旅行" />
+
+        <Button
+            android:id="@+id/btnInvestment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="📈 投資" />
+
+        <Button
+            android:id="@+id/btnoutOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="@color/botton_color"
+            android:text="📤 其他" />
+    </GridLayout>
+
+
+    <!-- 輸入金額 -->
+    <EditText
+        android:id="@+id/edtAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:hint="輸入金額"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="16dp" />
+
+    <!-- 確認按鈕 -->
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新增"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
+
+
+    <!-- 顯示平衡 -->
+
+    <TextView
+        android:id="@+id/txvTotalBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收支平衡：$0.0"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp" />
+
+    <!-- 顯示總收入 -->
+    <TextView
+        android:id="@+id/txvTotalIncome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="總收入：$0.0"
+        android:textColor="#2D9E37"
+        android:textColorLink="#52FF2B"
+        android:textSize="18sp" />
+
+    <!-- 顯示總支出 -->
+    <TextView
+        android:id="@+id/txvTotalExpense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="總支出：$0.0"
+        android:textColor="#B42828"
+        android:textSize="18sp" />
+
+</LinearLayout>

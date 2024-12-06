@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyFinanceApp</string>
+    <string-array name="category_array">
+        <item>📤 支出</item>
+        <item>📥 收入</item>
+    </string-array>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+</resources>
