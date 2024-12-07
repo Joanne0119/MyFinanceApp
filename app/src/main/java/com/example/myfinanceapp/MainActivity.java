@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -90,7 +91,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         };
 
         // 刪除舊資料庫（僅用於開發測試時）
-        this.deleteDatabase(DB_NAME);
+//        this.deleteDatabase(DB_NAME);
 
         // 開啟資料庫
         db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
@@ -159,6 +160,23 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 new int[]{R.id.category, R.id.info, R.id.amount},
                 0
         );
+
+        adapter.setViewBinder((view, cursor, columnIndex) -> {
+            // 檢查是否是我們想設定背景顏色的欄位
+            if (view.getId() == R.id.category || view.getId() == R.id.info || view.getId() == R.id.amount) {
+                String category = cursor.getString(cursor.getColumnIndexOrThrow("category"));
+
+                // 根據類別設置背景顏色
+                View parent = (View) view.getParent();
+                if (category.contains("收入") || category.contains("薪水")) {
+                    parent.setBackgroundColor(Color.rgb(221, 240, 222)); // 收入顯示綠色
+                } else {
+                    parent.setBackgroundColor(Color.rgb(245, 217, 215)); // 支出顯示紅色
+                }
+                return false; // 繼續執行其他綁定操作
+            }
+            return false;
+        });
 
         lv = findViewById(R.id.lv);
         lv.setAdapter(adapter);
@@ -254,6 +272,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         txvTotalIncome.setText(String.format("總收入：$%.2f", totalIncome));
         txvTotalExpense.setText(String.format("總支出：$%.2f", totalExpense));
         txvTotalBalance.setText(String.format("收支平衡：$%.2f", totalBalance));
+        edtInfo.setText("");
+        edtAmount.setText("");
     }
 
     private void addData(String selectedCategory, String info, String amount) {
