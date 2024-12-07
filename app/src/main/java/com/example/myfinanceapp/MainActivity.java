@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,6 +41,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     ListView lv;
 
     final String tag=MainActivity.class.getSimpleName();
+    final String tagName = "LIU";
     private Spinner spnCategory;
     private EditText edtAmount, edtInfo;
     private TextView txvTotalIncome, txvTotalExpense, txvTotalBalance;
@@ -117,7 +119,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         lv.setOnItemClickListener(this);
         requery();
 
-        btnInsert.setOnClickListener(this::onInsertUpdate);
+        btnInsert.setOnClickListener(v -> {
+            Log.d(tagName, "新增按鈕被點擊");
+            onInsertUpdate(v);
+        });
 
         // 處理收入按鈕選中狀態
         for (Button btn : incomeBtns) {
@@ -154,7 +159,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-        btnInsert.setOnClickListener(v -> updateTotals());
 
     }
 
@@ -198,7 +202,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         cv.put(FROM[0], selectedCategory); // 使用選中的類別
         cv.put(FROM[1], info);
         cv.put(FROM[2], '$' + amount);
-        db.insert(TB_NAME, null, cv);
+        long result = db.insert(TB_NAME, null, cv);
+        if (result != -1) {
+            Log.d(tagName, "新增成功，ID：" + result);
+        } else {
+            Log.e(tagName, "新增失敗");
+        }
     }
 
     private void update(String info, String amount, int id) {
@@ -214,6 +223,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             adapter.getCursor().close();
         }
         cur = db.rawQuery("SELECT * FROM " + TB_NAME, null);
+        Log.d(tagName, "目前資料筆數：" + cur.getCount());
         adapter.changeCursor(cur);
 
         btnInsert.setEnabled(cur.getCount() < MAX);
@@ -247,6 +257,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void onInsertUpdate(View v){
         String info = edtInfo.getText().toString().trim();
         String amount = edtAmount.getText().toString().trim();
+        Log.d(tagName, "進入");
 
         if (selectedCategory.isEmpty() || amount.isEmpty()) {
             // 顯示錯誤提示，確保所有欄位都有填寫
