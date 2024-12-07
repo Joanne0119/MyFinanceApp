@@ -256,43 +256,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         txvTotalBalance.setText(String.format("收支平衡：$%.2f", totalBalance));
     }
 
-
-    private void updateTotals() {
-        String amountText = edtAmount.getText().toString();
-        double amount;
-
-        // 確保金額輸入框非空，且轉換為 double
-        if (!amountText.isEmpty()) {
-            amount = Double.parseDouble(amountText);
-
-            // 判斷類別是收入還是支出
-            String category = spnCategory.getSelectedItem().toString();
-            if (category.contains("收入")) {
-                totalIncome += amount;
-                totalBalance += amount;
-            } else {
-                totalExpense += amount;
-                totalBalance -= amount;
-            }
-
-            // 更新顯示的總收入和總支出
-            txvTotalBalance.setText(String.format("收支平衡：$" + totalBalance));
-            txvTotalIncome.setText(String.format("總收入：$" + totalIncome));
-            txvTotalExpense.setText(String.format("總支出：$" + totalExpense));
-
-            // 清空金額輸入框
-            edtAmount.setText("");
-            edtInfo.setText("");
-
-            // 儲存總值到資料庫
-            ContentValues cv = new ContentValues();
-            cv.put("totalIncome", totalIncome);
-            cv.put("totalExpense", totalExpense);
-            cv.put("totalBalance", totalBalance);
-            db.update(TOTALS_TABLE, cv, null, null);
-        }
-    }
-
     private void addData(String selectedCategory, String info, String amount) {
         ContentValues cv = new ContentValues();
         cv.put(FROM[0], selectedCategory); // 使用選中的類別
@@ -365,7 +328,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         addData(selectedCategory, info, amount);
 
         // 更新總收入、總支出與平衡
-        updateTotals();
+        updateInitialTotals();
         requery(); // 重新查詢資料並更新列表
     }
 
