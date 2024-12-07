@@ -33,6 +33,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     static final String DB_NAME="FinanceDB";
     static final String TB_NAME="finance";
     static final int MAX=8;
+    static final String TOTALS_TABLE = "totals";
     static final String[] FROM=new String[] {"category","info","amount"};
     SQLiteDatabase db;
     Cursor cur;
@@ -88,6 +89,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 findViewById(R.id.btnoutOther)
         };
 
+        // 刪除舊資料庫（僅用於開發測試時）
+        this.deleteDatabase(DB_NAME);
+
         // 開啟資料庫
         db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
 
@@ -99,11 +103,53 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 "amount VARCHAR(64))";
         db.execSQL(createTable);
 
+        String createTotalTable = "CREATE TABLE IF NOT EXISTS totals " +
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "totalIncome REAL, " +
+                "totalExpense REAL, " +
+                "totalBalance REAL)";
+        db.execSQL(createTotalTable);
+
         cur = db.rawQuery("SELECT * FROM " + TB_NAME, null);
         if (cur.getCount() == 0) {
-            addData("🍔漢堡","全家49早餐組合", "$49");
-            addData("💰薪水","11月薪水", "$45000");
+            addData("🍔漢堡","全家49早餐組合", "49");
+            addData("💰薪水","11月薪水", "45000");
+
+            updateInitialTotals();
         }
+
+        Cursor totalCursor = db.rawQuery("SELECT * FROM " + TOTALS_TABLE, null);
+        if (totalCursor.moveToFirst()) { // 確保游標指向第一筆資料
+            int incomeIndex = totalCursor.getColumnIndex("totalIncome");
+            int expenseIndex = totalCursor.getColumnIndex("totalExpense");
+            int balanceIndex = totalCursor.getColumnIndex("totalBalance");
+
+            // 確認欄位是否存在
+            if (incomeIndex != -1 && expenseIndex != -1 && balanceIndex != -1) {
+                totalIncome = totalCursor.getDouble(incomeIndex);
+                totalExpense = totalCursor.getDouble(expenseIndex);
+                totalBalance = totalCursor.getDouble(balanceIndex);
+
+                // 更新 UI
+                txvTotalIncome.setText(String.format("總收入：$%.2f", totalIncome));
+                txvTotalExpense.setText(String.format("總支出：$%.2f", totalExpense));
+                txvTotalBalance.setText(String.format("收支平衡：$%.2f", totalBalance));
+            } else {
+                Log.e(tagName, "資料表欄位不完整！");
+            }
+        } else {
+            // 如果資料表沒有資料，初始化數據
+            totalIncome = 0.0;
+            totalExpense = 0.0;
+            totalBalance = 0.0;
+
+            ContentValues cv = new ContentValues();
+            cv.put("totalIncome", totalIncome);
+            cv.put("totalExpense", totalExpense);
+            cv.put("totalBalance", totalBalance);
+            db.insert(TOTALS_TABLE, null, cv);
+        }
+        totalCursor.close();
 
         adapter = new SimpleCursorAdapter(
                 this,
@@ -168,6 +214,49 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
     }
 
+    private void updateInitialTotals() {
+        Cursor initialCursor = db.rawQuery("SELECT * FROM " + TB_NAME, null);
+
+        double initialIncome = 0.0;
+        double initialExpense = 0.0;
+
+        while (initialCursor.moveToNext()) {
+            int categoryIndex = initialCursor.getColumnIndexOrThrow("category");
+            int amountIndex = initialCursor.getColumnIndexOrThrow("amount");
+
+            String category = initialCursor.getString(categoryIndex);
+            String amountStr = initialCursor.getString(amountIndex).replace("$", ""); // 移除金額中的「$」
+            double amount = Double.parseDouble(amountStr);
+
+            // 判斷是收入還是支出
+            if (category.contains("薪水") || category.contains("收入")) {
+                initialIncome += amount;
+            } else {
+                initialExpense += amount;
+            }
+        }
+
+        initialCursor.close();
+
+        // 計算收支平衡
+        totalIncome = initialIncome;
+        totalExpense = initialExpense;
+        totalBalance = totalIncome - totalExpense;
+
+        // 更新 totals 表
+        ContentValues cv = new ContentValues();
+        cv.put("totalIncome", totalIncome);
+        cv.put("totalExpense", totalExpense);
+        cv.put("totalBalance", totalBalance);
+        db.update(TOTALS_TABLE, cv, null, null);
+
+        // 更新 UI
+        txvTotalIncome.setText(String.format("總收入：$%.2f", totalIncome));
+        txvTotalExpense.setText(String.format("總支出：$%.2f", totalExpense));
+        txvTotalBalance.setText(String.format("收支平衡：$%.2f", totalBalance));
+    }
+
+
     private void updateTotals() {
         String amountText = edtAmount.getText().toString();
         double amount;
@@ -194,6 +283,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             // 清空金額輸入框
             edtAmount.setText("");
             edtInfo.setText("");
+
+            // 儲存總值到資料庫
+            ContentValues cv = new ContentValues();
+            cv.put("totalIncome", totalIncome);
+            cv.put("totalExpense", totalExpense);
+            cv.put("totalBalance", totalBalance);
+            db.update(TOTALS_TABLE, cv, null, null);
         }
     }
 
