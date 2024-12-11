@@ -5,14 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:padding="16dp"
+        android:background="@color/blue">
+
+        <!-- 左側圖片 -->
+        <ImageView
+            android:id="@+id/left_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/piggy_icon" />
+
+        <!-- 標題文字 -->
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Piggy"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- 右側圖片 -->
+        <Button
+            android:id="@+id/settingButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/setting_icon" />
+    </LinearLayout>
 
     <!-- 選擇收入或支出 -->
     <Spinner
         android:id="@+id/spnCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/category_array" />
+        android:entries="@array/category_array"
+        android:paddingHorizontal="16dp"/>
 
     <!-- 收入按鈕容器 -->
     <GridLayout
@@ -23,7 +60,8 @@
         android:alignmentMode="alignMargins"
         android:columnCount="3"
         android:padding="8dp"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:paddingHorizontal="16dp">
 
 
         <Button
@@ -90,7 +128,8 @@
         android:alignmentMode="alignMargins"
         android:columnCount="3"
         android:padding="8dp"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:paddingHorizontal="16dp">
 
         <Button
             android:id="@+id/btnFood"
@@ -151,7 +190,8 @@
     <!-- 輸入金額 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp">
         <TextView
             android:id="@+id/TextView01"
             android:layout_width="0dp"
@@ -175,7 +215,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp">
         <TextView
             android:id="@+id/TextView02"
             android:layout_width="0dp"
@@ -209,7 +250,8 @@
         android:layout_width="match_parent"
         android:layout_marginVertical="10dp"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp">
     </ListView>
 
     <!-- 顯示平衡 -->
@@ -220,7 +262,8 @@
         android:layout_height="wrap_content"
         android:text="@string/balance"
         android:textSize="18sp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="16dp"/>
 
     <!-- 顯示總收入 -->
     <TextView
@@ -231,7 +274,8 @@
         android:text="@string/total_income"
         android:textColor="#2D9E37"
         android:textColorLink="#52FF2B"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingHorizontal="16dp"/>
 
     <!-- 顯示總支出 -->
     <TextView
@@ -241,6 +285,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/total_expense"
         android:textColor="#B42828"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp"/>
 
 </LinearLayout>

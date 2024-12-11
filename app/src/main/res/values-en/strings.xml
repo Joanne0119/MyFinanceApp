@@ -37,4 +37,5 @@
     <string name="default_info_1">FamilyMart $49 Breakfast Combo</string>
     <string name="default_category_2">💰Salary</string>
     <string name="default_info_2">November Salary</string>
+    <string name="setting">Setting</string>
 </resources>

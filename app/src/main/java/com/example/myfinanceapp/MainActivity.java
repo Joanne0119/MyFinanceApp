@@ -3,6 +3,7 @@ package com.example.myfinanceapp;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -39,7 +40,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     SQLiteDatabase db;
     Cursor cur;
     SimpleCursorAdapter adapter;
-    Button btnInsert, btnUpdate, btnDelete;
+    Button btnInsert, btnUpdate, btnDelete, gotoSettingButton;
     ListView lv;
 
     final String tag=MainActivity.class.getSimpleName();
@@ -71,6 +72,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         btnInsert = findViewById(R.id.btnInsert);
 //        btnUpdate = findViewById(R.id.btnUpdate);
 //        btnDelete = findViewById(R.id.btnDelete);
+        gotoSettingButton = findViewById(R.id.settingButton);
+
+        gotoSettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoSecondActivity(v);
+            }
+        });
 
         Button[] incomeBtns = {
                 findViewById(R.id.btnSalary),
@@ -225,6 +234,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         });
 
     }
+    public void gotoSecondActivity(View v) {
+        Intent it = new Intent(this, SecondActivity.class); //建立 Intent 並設定目標 Activity
+        startActivity(it); // 啟動 Intent 中的目標 Activity
+    }
 
     private void clearButtonSelections(Button[] buttons) {
         for (Button btn : buttons) {
@@ -247,7 +260,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             double amount = Double.parseDouble(amountStr);
 
             // 判斷是收入還是支出
-            if (category.contains("薪水") || category.contains("收入")) {
+            if (category.contains("收入") || category.contains("Income") || category.contains("収入") || category.contains("지출") ||category.contains("薪水") || category.contains("Salary") || category.contains("給料") || category.contains("월급")) {
                 initialIncome += amount;
             } else {
                 initialExpense += amount;
