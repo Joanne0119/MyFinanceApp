@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyFinanceApp</string>
+    <string-array name="category_array">
+        <item>📤 支出</item>
+        <item>📥 収入</item>
+    </string-array>
+    <string name="income">収入</string>
+    <string name="expense">支出</string>
+    <string name="hello_world">こんにちは、世界！</string>
+    <string name="menu_settings">設定</string>
+    <string name="btn_salary">💰 給料</string>
+    <string name="btn_bonus">🏆 ボーナス</string>
+    <string name="btn_interest">💳 利息</string>
+    <string name="btn_gift">🎁 贈り物</string>
+    <string name="btn_allowance">💵 お小遣い</string>
+    <string name="btn_income_other">📥 その他</string>
+
+    <string name="btn_food">🍔 食費</string>
+    <string name="btn_household">🧻 日用品</string>
+    <string name="btn_clothing">👗 衣類</string>
+    <string name="btn_travel">🛩️ 旅行</string>
+    <string name="btn_investment">📈 投資</string>
+    <string name="btn_expense_other">📤 その他</string>
+
+    <!-- 其他文字資源 -->
+    <string name="amount">金額:</string>
+    <string name="amount_hint">金額を入力してください</string>
+    <string name="remarks_hint">備考を入力してください</string>
+    <string name="remarks">備考:</string>
+    <string name="balance">収支バランス：$%.2f</string>
+    <string name="total_income">総収入：$%.2f</string>
+    <string name="total_expense">総支出：$%.2f</string>
+    <string name="add">追加</string>
+    <string name="toast">カテゴリを選択し、金額を入力してください！</string>
+    <string name="default_category_1">🍔食べ物</string>
+    <string name="default_info_1">ファミリーマート49円朝食セット</string>
+    <string name="default_category_2">💰給料</string>
+    <string name="default_info_2">11月の給料</string>
+</resources>

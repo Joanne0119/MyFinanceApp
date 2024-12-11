@@ -4,6 +4,36 @@
         <item>📤 支出</item>
         <item>📥 收入</item>
     </string-array>
+    <string name="income">收入</string>
+    <string name="expense">支出</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="btn_salary">💰 薪水</string>
+    <string name="btn_bonus">🏆 獎金</string>
+    <string name="btn_interest">💳 利息</string>
+    <string name="btn_gift">🎁 贈與</string>
+    <string name="btn_allowance">💵 零用錢</string>
+    <string name="btn_income_other">📥 其他</string>
+
+    <string name="btn_food">🍔 食物</string>
+    <string name="btn_household">🧻 生活品</string>
+    <string name="btn_clothing">👗 衣服</string>
+    <string name="btn_travel">🛩️ 旅行</string>
+    <string name="btn_investment">📈 投資</string>
+    <string name="btn_expense_other">📤 其他</string>
+
+    <!-- 其他文字資源 -->
+    <string name="amount">金額:</string>
+    <string name="amount_hint">輸入金額</string>
+    <string name="remarks_hint">附註內容</string>
+    <string name="remarks">備註:</string>
+    <string name="balance">收支平衡：$%.2f</string>
+    <string name="total_income">總收入：$%.2f</string>
+    <string name="total_expense">總支出：$%.2f</string>
+    <string name="add">新增</string>
+    <string name="toast">請選擇類別並填寫金額！</string>
+    <string name="default_category_1">🍔食物</string>
+    <string name="default_info_1">全家49早餐組合</string>
+    <string name="default_category_2">💰薪水</string>
+    <string name="default_info_2">11月薪水</string>
 </resources>

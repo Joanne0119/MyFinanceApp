@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyFinanceApp</string>
+    <string-array name="category_array">
+        <item>📤 Expense</item>
+        <item>📥 Income</item>
+    </string-array>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="btn_salary">💰 Salary</string>
+    <string name="btn_bonus">🏆 Bonus</string>
+    <string name="btn_interest">💳 Interest</string>
+    <string name="btn_gift">🎁 Gift</string>
+    <string name="btn_allowance">💵 Allowance</string>
+    <string name="btn_income_other">📥 Other</string>
+
+    <string name="btn_food">🍔 Food</string>
+    <string name="btn_household">🧻 Household</string>
+    <string name="btn_clothing">👗 Clothing</string>
+    <string name="btn_travel">🛩️ Travel</string>
+    <string name="btn_investment">📈 Investment</string>
+    <string name="btn_expense_other">📤 Other</string>
+
+    <!-- Additional text resources -->
+    <string name="amount">Amount:</string>
+    <string name="amount_hint">Enter amount</string>
+    <string name="remarks_hint">Enter remarks</string>
+    <string name="remarks">Remarks:</string>
+    <string name="balance">Balance: $%.2f</string>
+    <string name="total_income">Total Income: $%.2f</string>
+    <string name="total_expense">Total Expense: $%.2f</string>
+    <string name="add">Add</string>
+    <string name="toast">Please select a category and enter the amount!</string>
+    <string name="default_category_1">🍔Food</string>
+    <string name="default_info_1">FamilyMart $49 Breakfast Combo</string>
+    <string name="default_category_2">💰Salary</string>
+    <string name="default_info_2">November Salary</string>
+</resources>

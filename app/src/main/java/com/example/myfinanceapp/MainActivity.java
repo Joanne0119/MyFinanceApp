@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         };
 
         // 刪除舊資料庫（僅用於開發測試時）
-//        this.deleteDatabase(DB_NAME);
+        this.deleteDatabase(DB_NAME);
 
         // 開啟資料庫
         db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
@@ -113,8 +113,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         cur = db.rawQuery("SELECT * FROM " + TB_NAME, null);
         if (cur.getCount() == 0) {
-            addData("🍔漢堡","全家49早餐組合", "49");
-            addData("💰薪水","11月薪水", "45000");
+            addData(getString(R.string.default_category_1),getString(R.string.default_info_1), "49");
+            addData(getString(R.string.default_category_2),getString(R.string.default_info_2), "45000");
 
             updateInitialTotals();
         }
@@ -132,9 +132,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 totalBalance = totalCursor.getDouble(balanceIndex);
 
                 // 更新 UI
-                txvTotalIncome.setText(String.format("總收入：$%.2f", totalIncome));
-                txvTotalExpense.setText(String.format("總支出：$%.2f", totalExpense));
-                txvTotalBalance.setText(String.format("收支平衡：$%.2f", totalBalance));
+                txvTotalIncome.setText(String.format(getString(R.string.total_income), totalIncome));
+                txvTotalExpense.setText(String.format(getString(R.string.total_expense), totalExpense));
+                txvTotalBalance.setText(String.format(getString(R.string.balance), totalBalance));
             } else {
                 Log.e(tagName, "資料表欄位不完整！");
             }
@@ -168,7 +168,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
                 // 根據類別設置背景顏色
                 View parent = (View) view.getParent();
-                if (category.contains("收入") || category.contains("薪水")) {
+                if (category.contains("收入") || category.contains("Income") || category.contains("収入") || category.contains("지출") ||category.contains("薪水") || category.contains("Salary") || category.contains("給料") || category.contains("월급")) {
                     parent.setBackgroundColor(Color.rgb(221, 240, 222)); // 收入顯示綠色
                 } else {
                     parent.setBackgroundColor(Color.rgb(245, 217, 215)); // 支出顯示紅色
@@ -211,10 +211,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String category = spnCategory.getSelectedItem().toString();
-                if (category.contains("收入")) {
+                if (category.contains("收入") || category.contains("Income") || category.contains("収入") || category.contains("지출")) {
                     incomeButtons.setVisibility(View.VISIBLE);
                     expenseButtons.setVisibility(View.GONE);
-                } else if (category.contains("支出")) {
+                } else if (category.contains("支出") || category.contains("Expense") || category.contains("수입")) {
                     incomeButtons.setVisibility(View.GONE);
                     expenseButtons.setVisibility(View.VISIBLE);
                 }
@@ -268,12 +268,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         cv.put("totalBalance", totalBalance);
         db.update(TOTALS_TABLE, cv, null, null);
 
-        // 更新 UI
-        txvTotalIncome.setText(String.format("總收入：$%.2f", totalIncome));
-        txvTotalExpense.setText(String.format("總支出：$%.2f", totalExpense));
-        txvTotalBalance.setText(String.format("收支平衡：$%.2f", totalBalance));
+        txvTotalIncome.setText(String.format(getString(R.string.total_income), totalIncome));
+        txvTotalExpense.setText(String.format(getString(R.string.total_expense), totalExpense));
+        txvTotalBalance.setText(String.format(getString(R.string.balance), totalBalance));
         edtInfo.setText("");
         edtAmount.setText("");
+
     }
 
     private void addData(String selectedCategory, String info, String amount) {
@@ -340,7 +340,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         if (selectedCategory.isEmpty() || amount.isEmpty()) {
             // 顯示錯誤提示，確保所有欄位都有填寫
-            Toast.makeText(this, "請選擇類別並填寫金額！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getText(R.string.toast), Toast.LENGTH_SHORT).show();
             return;
         }
 

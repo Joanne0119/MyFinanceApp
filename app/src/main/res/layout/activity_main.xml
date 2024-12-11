@@ -33,7 +33,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="💰 薪水" />
+            android:text="@string/btn_salary" />
 
         <Button
             android:id="@+id/btnBonus"
@@ -42,7 +42,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="🏆  獎金" />
+            android:text="@string/btn_bonus" />
 
         <Button
             android:id="@+id/btnInterest"
@@ -51,7 +51,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="💳 利息" />
+            android:text="@string/btn_interest" />
 
         <Button
             android:id="@+id/btnGift"
@@ -60,7 +60,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="🎁 贈與" />
+            android:text="@string/btn_gift" />
 
         <Button
             android:id="@+id/btnAllowance"
@@ -69,7 +69,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="💵 零用錢" />
+            android:text="@string/btn_allowance" />
 
         <Button
             android:id="@+id/btninOther"
@@ -78,7 +78,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="📥 其他" />
+            android:text="@string/btn_income_other" />
     </GridLayout>
 
     <!-- 支出按鈕容器 -->
@@ -99,7 +99,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="🍔 食物" />
+            android:text="@string/btn_food" />
 
         <Button
             android:id="@+id/btnHousehold"
@@ -108,7 +108,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="🧻 生活品" />
+            android:text="@string/btn_household" />
 
         <Button
             android:id="@+id/btnClothing"
@@ -117,7 +117,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="👗 衣服" />
+            android:text="@string/btn_clothing" />
 
         <Button
             android:id="@+id/btnTravel"
@@ -126,7 +126,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="🛩️ 旅行" />
+            android:text="@string/btn_travel" />
 
         <Button
             android:id="@+id/btnInvestment"
@@ -135,7 +135,7 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="📈 投資" />
+            android:text="@string/btn_investment" />
 
         <Button
             android:id="@+id/btnoutOther"
@@ -144,27 +144,54 @@
             android:layout_marginHorizontal="4dp"
             android:backgroundTint="@color/botton_color"
             android:textColor="@color/text_color"
-            android:text="📤 其他" />
+            android:text="@string/btn_expense_other" />
     </GridLayout>
 
 
     <!-- 輸入金額 -->
-    <EditText
-        android:id="@+id/edtAmount"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="輸入金額"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="16dp" />
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/amount"
+            android:layout_marginVertical="16dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/edtInfo"
+        <EditText
+            android:id="@+id/edtAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:ems="10"
+            android:hint="@string/amount_hint"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="附註內容"
-        android:inputType="textPersonName" />
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/remarks"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/edtInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:ems="10"
+            android:hint="@string/remarks_hint"
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
     <!-- 確認按鈕 -->
 
@@ -172,7 +199,7 @@
         android:id="@+id/btnInsert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="新增"
+        android:text="@string/add"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp" />
 
@@ -191,7 +218,7 @@
         android:id="@+id/txvTotalBalance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="收支平衡：$0.0"
+        android:text="@string/balance"
         android:textSize="18sp"
         android:layout_marginTop="8dp" />
 
@@ -201,7 +228,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="總收入：$0.0"
+        android:text="@string/total_income"
         android:textColor="#2D9E37"
         android:textColorLink="#52FF2B"
         android:textSize="18sp" />
@@ -212,7 +239,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="總支出：$0.0"
+        android:text="@string/total_expense"
         android:textColor="#B42828"
         android:textSize="18sp" />
 

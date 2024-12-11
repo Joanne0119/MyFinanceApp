@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyFinanceApp</string>
+    <string-array name="category_array">
+        <item>📤 지출</item>
+        <item>📥 수입</item>
+    </string-array>
+    <string name="income">수입</string>
+    <string name="expense">지출</string>
+    <string name="hello_world">안녕하세요, 세상!</string>
+    <string name="menu_settings">설정</string>
+    <string name="btn_salary">💰 월급</string>
+    <string name="btn_bonus">🏆 보너스</string>
+    <string name="btn_interest">💳 이자</string>
+    <string name="btn_gift">🎁 선물</string>
+    <string name="btn_allowance">💵 용돈</string>
+    <string name="btn_income_other">📥 기타</string>
+
+    <string name="btn_food">🍔 식비</string>
+    <string name="btn_household">🧻 생활용품</string>
+    <string name="btn_clothing">👗 의류</string>
+    <string name="btn_travel">🛩️ 여행</string>
+    <string name="btn_investment">📈 투자</string>
+    <string name="btn_expense_other">📤 기타</string>
+
+    <!-- 기타 텍스트 리소스 -->
+    <string name="amount">금액:</string>
+    <string name="amount_hint">금액을 입력하세요</string>
+    <string name="remarks_hint">비고를 입력하세요</string>
+    <string name="remarks">비고:</string>
+    <string name="balance">수지 균형: $%.2f</string>
+    <string name="total_income">총 수입: $%.2f</string>
+    <string name="total_expense">총 지출: $%.2f</string>
+    <string name="add">추가</string>
+    <string name="toast">카테고리를 선택하고 금액을 입력하세요！</string>
+    <string name="default_category_1">🍔음식</string>
+    <string name="default_info_1">패밀리마트 49원 조식 세트</string>
+    <string name="default_category_2">💰월급</string>
+    <string name="default_info_2">11월 월급</string>
+
+</resources>
