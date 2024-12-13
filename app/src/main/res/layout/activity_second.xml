@@ -37,4 +37,16 @@
             android:layout_marginEnd="16dp"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:textSize="20sp"
+        android:text="@string/language_setting" />
+    <Spinner
+        android:id="@+id/language_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:entries="@array/language_array"/>
 </LinearLayout>

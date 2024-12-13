@@ -5,6 +5,12 @@
         <item>📤 지출</item>
         <item>📥 수입</item>
     </string-array>
+    <string-array name="language_array">
+        <item>繁體中文</item>
+        <item>English</item>
+        <item>日文</item>
+        <item>한국어</item>
+    </string-array>
     <string name="income">수입</string>
     <string name="expense">지출</string>
     <string name="hello_world">안녕하세요, 세상!</string>
@@ -38,4 +44,5 @@
     <string name="default_category_2">💰월급</string>
     <string name="default_info_2">11월 월급</string>
     <string name="setting">설정</string>
+    <string name="language_setting">언어 설정 변경</string>
 </resources>
