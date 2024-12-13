@@ -1,6 +1,7 @@
 package com.example.myfinanceapp;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -30,13 +31,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
     static final String DB_NAME="FinanceDB";
     static final String TB_NAME="finance";
     static final int MAX=8;
     static final String TOTALS_TABLE = "totals";
-    static final String[] FROM=new String[] {"category","info","amount"};
+    static final String[] FROM=new String[] {"category","info","amount", "date"};
     SQLiteDatabase db;
     Cursor cur;
     SimpleCursorAdapter adapter;
@@ -46,13 +52,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     final String tag=MainActivity.class.getSimpleName();
     final String tagName = "LIU";
     private Spinner spnCategory;
-    private EditText edtAmount, edtInfo;
+    private EditText edtAmount, edtInfo, edtDate;
     private TextView txvTotalIncome, txvTotalExpense, txvTotalBalance;
     private GridLayout incomeButtons, expenseButtons;
     private double totalIncome = 0.0;
     private double totalExpense = 0.0;
     private double totalBalance = 0.0;
     private String selectedCategory = ""; // 儲存選中的類別
+    // 獲取今天的日期
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    String today = dateFormat.format(new Date());
 
 
     @Override
@@ -63,6 +72,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         // 元件初始化
         spnCategory = findViewById(R.id.spnCategory);
         edtAmount = findViewById(R.id.edtAmount);
+        edtDate = findViewById(R.id.datePicker);
         txvTotalIncome = findViewById(R.id.txvTotalIncome);
         txvTotalExpense = findViewById(R.id.txvTotalExpense);
         txvTotalBalance = findViewById(R.id.txvTotalBalance);
@@ -110,7 +120,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "category VARCHAR(32), " +
                 "info VARCHAR(32), " +
-                "amount VARCHAR(64))";
+                "amount VARCHAR(64)," +
+                "date VARCHAR(32))";
         db.execSQL(createTable);
 
         String createTotalTable = "CREATE TABLE IF NOT EXISTS totals " +
@@ -122,8 +133,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         cur = db.rawQuery("SELECT * FROM " + TB_NAME, null);
         if (cur.getCount() == 0) {
-            addData(getString(R.string.default_category_1),getString(R.string.default_info_1), "49");
-            addData(getString(R.string.default_category_2),getString(R.string.default_info_2), "45000");
+            addData(getString(R.string.default_category_1),getString(R.string.default_info_1), "49", today);
+            addData(getString(R.string.default_category_2),getString(R.string.default_info_2), "45000", today);
 
             updateInitialTotals();
         }
@@ -166,7 +177,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 R.layout.item,
                 cur,
                 FROM,
-                new int[]{R.id.category, R.id.info, R.id.amount},
+                new int[]{R.id.category, R.id.info, R.id.amount, R.id.date},
                 0
         );
 
@@ -231,7 +242,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
+
         });
+
+        EditText datePicker = findViewById(R.id.datePicker);
+
+
+        // 為日期輸入框添加點擊事件
+        datePicker.setOnClickListener(v -> showDatePickerDialog(datePicker));
 
     }
     public void gotoSecondActivity(View v) {
@@ -289,11 +307,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     }
 
-    private void addData(String selectedCategory, String info, String amount) {
+    private void addData(String selectedCategory, String info, String amount, String date) {
         ContentValues cv = new ContentValues();
         cv.put(FROM[0], selectedCategory); // 使用選中的類別
         cv.put(FROM[1], info);
         cv.put(FROM[2], '$' + amount);
+        cv.put(FROM[3], date);
         long result = db.insert(TB_NAME, null, cv);
         if (result != -1) {
             Log.d(tagName, "新增成功，ID：" + result);
@@ -337,11 +356,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         int categoryIndex = cur.getColumnIndex(FROM[0]);
         int infoIndex = cur.getColumnIndex(FROM[1]);
         int amountIndex = cur.getColumnIndex(FROM[2]);
+        int dateIndex = cur.getColumnIndex(FROM[3]);
 
 //        if (categoryIndex != -1) edtInfo.setText(cur.getString(categoryIndex));
         if (infoIndex != -1) edtInfo.setText(cur.getString(infoIndex));
         if (amountIndex != -1) edtAmount.setText(cur.getString(amountIndex));
-
+        if (dateIndex != -1) edtDate.setText(cur.getString(dateIndex));
 //        btUpdate.setEnabled(true);
 //        btDelete.setEnabled(true);
     }
@@ -349,7 +369,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void onInsertUpdate(View v){
         String info = edtInfo.getText().toString().trim();
         String amount = edtAmount.getText().toString().trim();
+        String date = edtDate.getText().toString().trim();
         Log.d(tagName, "進入");
+        if(date.isEmpty()){
+            // 設置為今天的日期
+            edtDate.setText(today);
+        }
 
         if (selectedCategory.isEmpty() || amount.isEmpty()) {
             // 顯示錯誤提示，確保所有欄位都有填寫
@@ -358,7 +383,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
 
         // 新增資料
-        addData(selectedCategory, info, amount);
+        addData(selectedCategory, info, amount, date);
 
         // 更新總收入、總支出與平衡
         updateInitialTotals();
@@ -375,6 +400,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onDestroy();
         if (cur != null && !cur.isClosed()) cur.close();
         if (db != null && db.isOpen()) db.close();
+    }
+
+    private void showDatePickerDialog(EditText dateField) {
+        Calendar calendar = Calendar.getInstance();
+
+        new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            String selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, dayOfMonth);
+            dateField.setText(selectedDate);
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
 }

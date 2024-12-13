@@ -31,6 +31,8 @@
 
     <!-- 기타 텍스트 리소스 -->
     <string name="amount">금액:</string>
+    <string name="date">날짜:</string>
+    <string name="date_select_hint">날짜를 선택하세요</string>
     <string name="amount_hint">금액을 입력하세요</string>
     <string name="remarks_hint">비고를 입력하세요</string>
     <string name="remarks">비고:</string>

@@ -31,6 +31,8 @@
 
     <!-- 其他文字資源 -->
     <string name="amount">金額:</string>
+    <string name="date">日付:</string>
+    <string name="date_select_hint">日付を選択してください</string>
     <string name="amount_hint">金額を入力してください</string>
     <string name="remarks_hint">備考を入力してください</string>
     <string name="remarks">備考:</string>

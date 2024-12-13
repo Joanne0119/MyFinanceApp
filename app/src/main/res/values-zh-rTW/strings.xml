@@ -31,6 +31,8 @@
 
     <!-- 其他文字資源 -->
     <string name="amount">金額:</string>
+    <string name="date">日期:</string>
+    <string name="date_select_hint">請選擇日期</string>
     <string name="amount_hint">輸入金額</string>
     <string name="remarks_hint">附註內容</string>
     <string name="remarks">備註:</string>

@@ -31,6 +31,8 @@
 
     <!-- Additional text resources -->
     <string name="amount">Amount:</string>
+    <string name="date">Date:</string>
+    <string name="date_select_hint">Please select a date</string>
     <string name="amount_hint">Enter amount</string>
     <string name="remarks_hint">Enter remarks</string>
     <string name="remarks">Remarks:</string>
