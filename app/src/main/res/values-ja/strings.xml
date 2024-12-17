@@ -40,6 +40,8 @@
     <string name="total_income">総収入：$%.2f</string>
     <string name="total_expense">総支出：$%.2f</string>
     <string name="add">追加</string>
+    <string name="update">更新</string>
+    <string name="delete">削除</string>
     <string name="toast">カテゴリを選択し、金額を入力してください！</string>
     <string name="default_category_1">🍔食べ物</string>
     <string name="default_info_1">ファミリーマート49円朝食セット</string>

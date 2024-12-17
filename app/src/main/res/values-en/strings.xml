@@ -40,6 +40,8 @@
     <string name="total_income">Total Income: $%.2f</string>
     <string name="total_expense">Total Expense: $%.2f</string>
     <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
     <string name="toast">Please select a category and enter the amount!</string>
     <string name="default_category_1">🍔Food</string>
     <string name="default_info_1">FamilyMart $49 Breakfast Combo</string>

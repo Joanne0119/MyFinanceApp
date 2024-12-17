@@ -40,6 +40,8 @@
     <string name="total_income">總收入：$%.2f</string>
     <string name="total_expense">總支出：$%.2f</string>
     <string name="add">新增</string>
+    <string name="update">修改</string>
+    <string name="delete">刪除</string>
     <string name="toast">請選擇類別並填寫金額！</string>
     <string name="default_category_1">🍔食物</string>
     <string name="default_info_1">全家49早餐組合</string>

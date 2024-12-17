@@ -80,8 +80,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         expenseButtons = findViewById(R.id.expenseButtons);
         edtInfo = findViewById(R.id.edtInfo);
         btnInsert = findViewById(R.id.btnInsert);
-//        btnUpdate = findViewById(R.id.btnUpdate);
-//        btnDelete = findViewById(R.id.btnDelete);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        btnDelete = findViewById(R.id.btnDelete);
         gotoSettingButton = findViewById(R.id.settingButton);
 
         gotoSettingButton.setOnClickListener(new View.OnClickListener() {
@@ -321,11 +321,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
     }
 
-    private void update(String info, String amount, int id) {
+    private void update(String selectedCategory, String info, String amount, String date, int id) {
         ContentValues cv = new ContentValues();
         cv.put(FROM[0], selectedCategory); // 更新選中的類別
         cv.put(FROM[1], info);
         cv.put(FROM[2], amount);
+        cv.put(FROM[3], date);
         db.update(TB_NAME, cv, "_id=" + id, null);
     }
 
@@ -338,8 +339,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         adapter.changeCursor(cur);
 
         btnInsert.setEnabled(cur.getCount() < MAX);
-//        btUpdate.setEnabled(false);
-//        btDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
 
     @Override
@@ -371,8 +372,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             }
         }
         if (dateIndex != -1) edtDate.setText(cur.getString(dateIndex));
-//        btUpdate.setEnabled(true);
-//        btDelete.setEnabled(true);
+        btnUpdate.setEnabled(true);
+        btnDelete.setEnabled(true);
     }
 
     public void onInsertUpdate(View v){
@@ -391,8 +392,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             return;
         }
 
-        // 新增資料
-        addData(selectedCategory, info, amount, date);
+        if(v.getId()==R.id.btnUpdate){
+            update(selectedCategory, info, amount, date, cur.getInt(0));
+        }
+        else{
+            // 新增資料
+            addData(selectedCategory, info, amount, date);
+        }
+
 
         // 更新總收入、總支出與平衡
         updateInitialTotals();

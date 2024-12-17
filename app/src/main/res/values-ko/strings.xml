@@ -40,6 +40,8 @@
     <string name="total_income">총 수입: $%.2f</string>
     <string name="total_expense">총 지출: $%.2f</string>
     <string name="add">추가</string>
+    <string name="update">수정</string>
+    <string name="delete">삭제</string>
     <string name="toast">카테고리를 선택하고 금액을 입력하세요！</string>
     <string name="default_category_1">🍔음식</string>
     <string name="default_info_1">패밀리마트 49원 조식 세트</string>
