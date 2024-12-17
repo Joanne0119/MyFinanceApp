@@ -188,7 +188,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
                 // 根據類別設置背景顏色
                 View parent = (View) view.getParent();
-                if (category.contains("收入") || category.contains("Income") || category.contains("収入") || category.contains("지출") ||category.contains("薪水") || category.contains("Salary") || category.contains("給料") || category.contains("월급")) {
+                if (category.contains("薪水") || category.contains("Salary") || category.contains("給料") || category.contains("월급") || category.contains("獎金") || category.contains("Bonus") || category.contains("ボーナス") || category.contains("보너스") || category.contains("Interest") || category.contains("利息") || category.contains("이자") || category.contains("贈與") || category.contains("Gift") || category.contains("贈り物") || category.contains("선물") || category.contains("零用錢") || category.contains("Allowance") || category.contains("お小遣い") || category.contains("용돈") || category.contains("\uD83D\uDCE5")) {
                     parent.setBackgroundColor(Color.rgb(221, 240, 222)); // 收入顯示綠色
                 } else {
                     parent.setBackgroundColor(Color.rgb(245, 217, 215)); // 支出顯示紅色
@@ -319,6 +319,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         } else {
             Log.e(tagName, "新增失敗");
         }
+        requery();
     }
 
     private void update(String info, String amount, int id) {
@@ -358,9 +359,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         int amountIndex = cur.getColumnIndex(FROM[2]);
         int dateIndex = cur.getColumnIndex(FROM[3]);
 
-//        if (categoryIndex != -1) edtInfo.setText(cur.getString(categoryIndex));
         if (infoIndex != -1) edtInfo.setText(cur.getString(infoIndex));
-        if (amountIndex != -1) edtAmount.setText(cur.getString(amountIndex));
+        if (amountIndex != -1) {
+            String amountString = cur.getString(amountIndex);
+            if (amountString != null && amountString.length() > 1) {
+                // 去掉第一個字元，從第二個字元開始
+                edtAmount.setText(amountString.substring(1));
+            } else {
+                // 如果字串為空或只有一個字元，設置為空
+                edtAmount.setText("");
+            }
+        }
         if (dateIndex != -1) edtDate.setText(cur.getString(dateIndex));
 //        btUpdate.setEnabled(true);
 //        btDelete.setEnabled(true);
@@ -373,7 +382,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         Log.d(tagName, "進入");
         if(date.isEmpty()){
             // 設置為今天的日期
-            edtDate.setText(today);
+            date = today;
         }
 
         if (selectedCategory.isEmpty() || amount.isEmpty()) {
