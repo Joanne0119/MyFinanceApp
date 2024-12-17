@@ -36,4 +36,14 @@
             android:textStyle="bold"
             android:layout_marginEnd="16dp"/>
     </LinearLayout>
+    <com.github.mikephil.charting.charts.BarChart
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/barchart"/>
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/piechart"/>
 </LinearLayout>
