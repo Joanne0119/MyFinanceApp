@@ -18,8 +18,8 @@
         <!-- 左側圖片 -->
         <Button
             android:id="@+id/button_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/back_icon"
             android:onClick="goBack"/>
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/setting"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginEnd="16dp"/>
     </LinearLayout>

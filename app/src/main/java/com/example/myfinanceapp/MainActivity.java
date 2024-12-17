@@ -319,7 +319,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         } else {
             Log.e(tagName, "新增失敗");
         }
-        requery();
     }
 
     private void update(String info, String amount, int id) {
@@ -358,6 +357,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         int infoIndex = cur.getColumnIndex(FROM[1]);
         int amountIndex = cur.getColumnIndex(FROM[2]);
         int dateIndex = cur.getColumnIndex(FROM[3]);
+
 
         if (infoIndex != -1) edtInfo.setText(cur.getString(infoIndex));
         if (amountIndex != -1) {

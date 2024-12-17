@@ -18,8 +18,8 @@
         <!-- 左側圖片 -->
         <ImageView
             android:id="@+id/left_image"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/piggy_icon" />
 
@@ -31,14 +31,14 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="Piggy"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <!-- 右側圖片 -->
         <Button
             android:id="@+id/settingButton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/setting_icon" />
     </LinearLayout>
