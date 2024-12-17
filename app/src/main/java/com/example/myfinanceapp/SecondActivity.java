@@ -32,8 +32,7 @@ import java.util.Locale;
 
 public class SecondActivity extends AppCompatActivity {
 
-    BarChart barChart;
-    PieChart pieChart;
+    PieChart pieChart1, pieChart2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,33 +48,33 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-        barChart = findViewById(R.id.barchart);
-        pieChart = findViewById(R.id.piechart);
+        pieChart1 = findViewById(R.id.pieChart_income);
+        pieChart2 = findViewById(R.id.pieChart_expend);
 
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+        ArrayList<Float> pieChart1Values = (ArrayList<Float>) getIntent().getSerializableExtra("pie_chart_1_values");
+        ArrayList<Float> pieChart2Values = (ArrayList<Float>) getIntent().getSerializableExtra("pie_chart_2_values");
 
-        for(int i = 1; i < 10; i++){
-            float value = (float) (i * 10.0);
-            BarEntry barEntry = new BarEntry(i, value);
-            PieEntry pieEntry = new PieEntry(i, value);
-            barEntries.add(barEntry);
-            pieEntries.add(pieEntry);
+        // 生成第一個 PieChart
+        ArrayList<PieEntry> pieEntries1 = new ArrayList<>();
+        for (int i = 0; i < pieChart1Values.size(); i++) {
+            pieEntries1.add(new PieEntry(pieChart1Values.get(i), "Label " + (i + 1)));
         }
+        PieDataSet pieDataSet1 = new PieDataSet(pieEntries1, "Income");
+        pieDataSet1.setColors(ColorTemplate.PASTEL_COLORS);
+        pieChart1.setData(new PieData(pieDataSet1));
+        pieChart1.animateXY(1500, 1500);
+        pieChart1.getDescription().setEnabled(false);
 
-        BarDataSet barDataSet = new BarDataSet(barEntries, "Employees");
-        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        barDataSet.setDrawValues(false);
-        barChart.setData(new BarData(barDataSet));
-        barChart.animateY(1500);
-        barChart.getDescription().setText("Employees Chart");
-        barChart.getDescription().setTextColor(Color.BLUE);
-
-        PieDataSet pieDataSet = new PieDataSet(pieEntries, "Students");
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieChart.setData(new PieData(pieDataSet));
-        pieChart.animateXY(1500, 1500);
-        pieChart.getDescription().setEnabled(false);
+        // 生成第二個 PieChart
+        ArrayList<PieEntry> pieEntries2 = new ArrayList<>();
+        for (int i = 0; i < pieChart2Values.size(); i++) {
+            pieEntries2.add(new PieEntry(pieChart2Values.get(i), "Label " + (i + 1)));
+        }
+        PieDataSet pieDataSet2 = new PieDataSet(pieEntries2, "Expense");
+        pieDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieChart2.setData(new PieData(pieDataSet2));
+        pieChart2.animateXY(1500, 1500);
+        pieChart2.getDescription().setEnabled(false);
     }
 
     public void goBack(View v) {

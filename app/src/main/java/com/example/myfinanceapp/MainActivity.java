@@ -32,6 +32,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -250,10 +252,27 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         // 為日期輸入框添加點擊事件
         datePicker.setOnClickListener(v -> showDatePickerDialog(datePicker));
-
     }
+    //onCreate結束
     public void gotoSecondActivity(View v) {
         Intent it = new Intent(this, SecondActivity.class); //建立 Intent 並設定目標 Activity
+
+        ArrayList<Float> pieChart1Values = new ArrayList<>();
+        ArrayList<Float> pieChart2Values = new ArrayList<>();
+
+        // 設定第一個 PieChart 的資料
+        pieChart1Values.add(25.0f);
+        pieChart1Values.add(35.0f);
+        pieChart1Values.add(40.0f);
+
+        // 設定第二個 PieChart 的資料
+        pieChart2Values.add(20.0f);
+        pieChart2Values.add(30.0f);
+        pieChart2Values.add(50.0f);
+
+        // 使用 Intent 傳遞資料
+        it.putExtra("pie_chart_1_values", pieChart1Values);
+        it.putExtra("pie_chart_2_values", pieChart2Values);
         startActivity(it); // 啟動 Intent 中的目標 Activity
     }
 
